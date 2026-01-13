@@ -1,74 +1,14 @@
-import { useState } from 'react';
-import { CORE_CONCEPTS } from './data.js';
-import Header from './components/Header.jsx';
-import CoreConcept from './components/CoreConcept.jsx';
-import TabButton from './components/TabButton.jsx';
-import { EXAMPLES } from './data.js';
+import Header from "./components/Header.jsx";
+import CoreConcepts from "./components/CoreConcepts.jsx";
+import Examples from "./components/Examples.jsx";
+
 function App() {
-  const [ selectedTopic, setSelectedTopic ] = useState();
-
-
-  function handleSelect(selectedButton) {
-    //the selectedButton parameter is custom and it can be anything to ensure that its only response want that gets displayed when clicked
-    // selectedButton => 'component', 'jsx', 'props', 'state'
-    setSelectedTopic(selectedButton);
-        console.log(selectedTopic);
-    }
-
   return (
-    <div>  
-      <Header /> 
+    <div>
+      <Header />
       <main>
-        <section id='core-concepts'>
-          <h2>Core Concepts</h2>
-          {/* outputting list dynamically */}
-          <ul>
-            {CORE_CONCEPTS.map((conceptItem) => (
-              <CoreConcept key={conceptItem.title} {...conceptItem} />
-            ))}
-            {/* using the spread operator to pull out the key-value pairs */}
-          </ul>
-        </section>
-        <section id='examples'>
-          <h2>Examples</h2>
-          <menu>
-            <TabButton 
-              isSelected={selectedTopic === 'components'} 
-              onSelect={() => handleSelect('components')}
-            >
-              Components
-            </TabButton>
-            <TabButton 
-              isSelected={selectedTopic === 'jsx'} 
-              onSelect={() => handleSelect('jsx')}
-            >
-              JSX
-            </TabButton>
-            <TabButton 
-              isSelected={selectedTopic === 'props'} 
-              onSelect={() => handleSelect('props')}
-            >
-              Props
-            </TabButton>
-            <TabButton 
-              isSelected={selectedTopic === 'state'} 
-              onSelect={() => handleSelect('state')}
-            >
-              State
-            </TabButton>
-          </menu>
-            {/* Rendering contents conditionally */}
-            {!selectedTopic && <p>Please select a topic.</p>} 
-            {selectedTopic && (
-              <div id='tab-content'>
-                <h3>{EXAMPLES[selectedTopic].title}</h3>
-                <p>{EXAMPLES[selectedTopic].description}</p>
-                <pre>
-                  <code>{EXAMPLES[selectedTopic].code}</code>
-              </pre>
-              </div>
-            )}   
-        </section>     
+        <CoreConcepts />
+        <Examples />
       </main>
     </div>
   );
